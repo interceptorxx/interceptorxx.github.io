@@ -1,4 +1,3 @@
-
 name: Playwright Tests and Deploy
 
 on:
@@ -18,7 +17,7 @@ concurrency:
 
 jobs:
   playwright:
-    name: 'Playwright Tests'
+    name: 'Tests'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
@@ -47,6 +46,7 @@ jobs:
           path: myapp-qa/playwright-report
           retention-days: 30
   deploy:
+    name: 'Reporter'
     needs: playwright
     environment:
       name: github-pages
