@@ -14,11 +14,7 @@ permissions:
 concurrency:
   group: 'pages'
   cancel-in-progress: true
-
-defaults: &path
-  run:
-    working-directory: myapp-qa
-
+  
 jobs:
   playwright:
     name: 'Tests'
