@@ -15,15 +15,17 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
+defaults: &path
+  run:
+    working-directory: myapp-qa
+
 jobs:
   playwright:
-    name: 'Playwright Tests'
+    <<: *path
+    name: 'Tests'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    defaults:
-      run:
-        working-directory: myapp-qa
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -42,11 +44,11 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: github-pages
+          name: github-pages-${{ steps.timestampid.outputs.timestamp }}
           path: myapp-qa/playwright-report
           retention-days: 30
   release:
-    name: Release Playwright
+    name: Release
     runs-on: ubuntu-latest
     needs: playwright
     steps:
@@ -54,9 +56,10 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: github-pages
-    - name: Test Artifact
+    - name: Print Artifact Path
       run: ls -R        
   deploy:
+    name: Reporter 
     needs: release
     environment:
       name: github-pages
