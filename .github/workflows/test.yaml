@@ -14,7 +14,7 @@ permissions:
 concurrency:
   group: 'pages'
   cancel-in-progress: true
-  
+
 jobs:
   playwright:
     name: 'Tests'
@@ -54,7 +54,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: github-pages
-    - name: Print Artifact Path
+    - name: Test Artifact
       run: ls -R        
   deploy:
     name: 'Reporter'
