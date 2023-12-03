@@ -1,3 +1,4 @@
+
 name: Playwright Tests and Deploy
 
 on:
@@ -17,7 +18,7 @@ concurrency:
 
 jobs:
   playwright:
-    name: 'Tests'
+    name: 'Playwright Tests'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
@@ -35,6 +36,8 @@ jobs:
         run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Run your tests
         run: npx playwright test myapp-qa/src/
       - uses: actions/upload-artifact@v3
@@ -45,7 +48,6 @@ jobs:
           retention-days: 30
   deploy:
     needs: playwright
-    name: 'Reporter'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
