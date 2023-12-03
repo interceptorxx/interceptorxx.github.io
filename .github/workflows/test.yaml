@@ -40,7 +40,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: playwright-report
+          name: github-pages
           path: myapp-qa/playwright-report
           retention-days: 30
 
@@ -52,14 +52,14 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: playwright-report
+          name: github-pages
       - name: Test Artifact
         run: ls -R
 
   deploy:
     needs: playwright
     environment:
-      name: playwright-report
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
