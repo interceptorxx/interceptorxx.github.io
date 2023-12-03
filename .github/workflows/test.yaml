@@ -58,7 +58,6 @@ jobs:
   #     run: ls -R        
   deploy:
     needs: playwright
-    name: 'Reporter'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
