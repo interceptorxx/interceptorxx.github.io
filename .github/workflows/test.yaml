@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [main, master]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
 jobs:
   playwright:
     name: 'Playwright Tests'
@@ -51,10 +60,6 @@ jobs:
 
   deploy:
     needs: playwright
-    permissions:
-      contents: read
-      pages: write
-      id-token: write 
     environment:
       name: playwright-report
       url: https://interceptorxx.github.io/
@@ -63,5 +68,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          artifact-name: playwright-report
