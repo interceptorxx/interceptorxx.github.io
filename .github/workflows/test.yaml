@@ -62,7 +62,7 @@ jobs:
     needs: playwright
     environment:
       name: playwright-report
-      url: https://interceptorxx.github.io/
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
