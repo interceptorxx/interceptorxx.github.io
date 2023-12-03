@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   playwright:
-    name: 'Playwright Tests'
+    name: 'Playwright Tests and Deploy'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
@@ -36,7 +36,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run your tests
-        run: npx playwright test myapp-qa/src/
+        run: |
+          npx playwright test myapp-qa/src/
+          if [ $? -eq 0 ]; then
+            echo "Tests passed. Deploying to GitHub Pages..."
+            # Add deployment steps here
+            - name: Deploy to GitHub Pages
+              uses: actions/deploy-pages@v2
+              # Additional deployment configuration goes here
+          else
+            echo "Tests failed. Not deploying to GitHub Pages."
+          fi
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -56,13 +66,13 @@ jobs:
       - name: Test Artifact
         run: ls -R
 
-  deploy:
-    needs: playwright
-    environment:
-      name: playwright-report
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+  # deploy:
+  #   needs: playwright
+  #   environment:
+  #     name: playwright-report
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v2
