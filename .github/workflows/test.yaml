@@ -35,10 +35,8 @@ jobs:
         run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
       - name: Run your tests
-        run: npx playwright test myapp-qa/src/
+        run: npx playwright test --verbose myapp-qa/src/
       - uses: actions/upload-artifact@v3
         if: always()
         with:
