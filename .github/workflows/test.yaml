@@ -48,21 +48,19 @@ jobs:
           name: playwright-report
       - name: Test Artifact
         run: ls -R
-      - name: Deploy Artifact
-        uses: actions/deploy-pages@v2
 
-  # deploy:
-  #   needs: release
-  #   permissions:
-  #     pages: write
-  #     id-token: write 
-  #   environment:
-  #     name: playwright-report
-  #     url: https://interceptorxx.github.io/
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v2
-  #       with:
-  #         artifact-name: playwright-report
+  deploy:
+    needs: playwright
+    permissions:
+      pages: write
+      id-token: write 
+    environment:
+      name: playwright-report
+      url: https://interceptorxx.github.io/
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        with:
+          artifact-name: playwright-report
