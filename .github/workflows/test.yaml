@@ -46,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: playwright-report
-          path: myapp-qa/playwright-report
+          path: ../
       - name: Test Artifact
         run: ls -R
 
