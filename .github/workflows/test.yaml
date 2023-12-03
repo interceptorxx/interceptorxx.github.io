@@ -42,7 +42,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: github-pages-${{ steps.timestampid.outputs.timestamp }}
+          name: github-pages
           path: myapp-qa/playwright-report
           retention-days: 30
   release:
