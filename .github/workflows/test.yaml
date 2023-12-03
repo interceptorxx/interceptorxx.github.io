@@ -57,7 +57,7 @@ jobs:
       id-token: write 
     environment:
       name: github-pages
-      url: https://shohinsan.github.io/myapp-qa.github.io/
+      url: https://interceptorxx.github.io/
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
