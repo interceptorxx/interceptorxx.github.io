@@ -48,8 +48,6 @@ jobs:
     name: Release Playwright
     runs-on: ubuntu-latest
     needs: playwright
-    outputs:
-      artifact_path: ${{ needs.playwright.outputs.artifact_path }}
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
