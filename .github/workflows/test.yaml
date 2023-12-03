@@ -45,20 +45,20 @@ jobs:
           name: github-pages
           path: myapp-qa/playwright-report
           retention-days: 30
-  release:
-    name: 'Release'
-    runs-on: ubuntu-latest
-    needs: playwright
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: github-pages
-    - name: Test Artifact
-      run: ls -R        
+  # release:
+  #   name: 'Release'
+  #   runs-on: ubuntu-latest
+  #   needs: playwright
+  #   steps:
+  #   - name: Download artifact
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: github-pages
+  #   - name: Test Artifact
+  #     run: ls -R        
   deploy:
     name: 'Reporter'
-    needs: release
+    needs: playwright
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
