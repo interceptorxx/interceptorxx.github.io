@@ -28,6 +28,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Cache pnpm
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pnpm-store
+          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
       - name: Install Node.js 18
         uses: actions/setup-node@v4
         with:
