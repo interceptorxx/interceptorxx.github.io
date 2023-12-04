@@ -1,66 +1,66 @@
-name: Playwright Tests and Deploy
+# name: Playwright Tests and Deploy
 
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+# on:
+#   push:
+#     branches: [main, master]
+#   pull_request:
+#     branches: [main, master]
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+# concurrency:
+#   group: 'pages'
+#   cancel-in-progress: true
 
-jobs:
+# jobs:
 
-  playwright:
-    name: 'Tests'
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    defaults:
-      run:
-        working-directory: myapp-qa
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Cache pnpm
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.pnpm-store
-          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-${{ runner.os }}-
-      - name: Install Node.js 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install pnpm with Node.js 18
-        run: npm install -g pnpm
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run your tests
-        run: npx playwright test myapp-qa/src/
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: github-pages
-          path: myapp-qa/playwright-report
-          retention-days: 30
+#   playwright:
+#     name: 'Tests'
+#     runs-on: ubuntu-latest
+#     container:
+#       image: mcr.microsoft.com/playwright:v1.40.0-jammy
+#     defaults:
+#       run:
+#         working-directory: myapp-qa
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+#       - name: Cache pnpm
+#         uses: actions/cache@v2
+#         with:
+#           path: |
+#             ~/.pnpm-store
+#           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: |
+#             pnpm-${{ runner.os }}-
+#       - name: Install Node.js 18
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
+#       - name: Install pnpm with Node.js 18
+#         run: npm install -g pnpm
+#       - name: Install dependencies
+#         run: pnpm install
+#       - name: Run your tests
+#         run: npx playwright test myapp-qa/src/
+#       - uses: actions/upload-artifact@v3
+#         if: always()
+#         with:
+#           name: github-pages
+#           path: myapp-qa/playwright-report
+#           retention-days: 30
           
-  deploy:
-    name: 'Reporter'
-    needs: playwright
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+#   deploy:
+#     name: 'Reporter'
+#     needs: playwright
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v2
