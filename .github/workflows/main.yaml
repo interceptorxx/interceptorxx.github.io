@@ -17,14 +17,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Install Dependencies
-        uses: ./.github/workflows/node.yml
+        uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yml@main
       - name: Setup Tests
-        uses: ./.github/workflows/tests.yml
-
+        uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yml@main
   reporter:
     name: 'Reporter'
     runs-on: ubuntu-latest
     needs: tests  
     steps:
       - name: Deploy
-        uses: ./.github/workflows/deploy.yml
+        uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yml@main
