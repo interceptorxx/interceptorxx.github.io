@@ -21,15 +21,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Cache pnpm
-        id: pnpm-lock-id
+        id: cached-dependencies
         uses: actions/cache/save@v3
         with:
           path: |
             ./
           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-${{ runner.os }}-build
-            pnpm-${{ runner.os }}-
+          
+      # - name: Cache pnpm
+      #   id: pnpm-lock-id
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       ./
+      #     key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       pnpm-${{ runner.os }}-build
+      #       pnpm-${{ runner.os }}-
         
 
 
