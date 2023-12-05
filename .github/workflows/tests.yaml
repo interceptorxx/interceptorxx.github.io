@@ -27,7 +27,7 @@ jobs:
           ls -a  # Check if files are listed without detailed information
           ls -alA
       - name: Run your tests
-        run: npx playwright src
+        run: npx playwright test myapp-qa/src/
       - uses: actions/upload-artifact@v3
         if: always()
         with:
