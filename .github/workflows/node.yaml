@@ -21,9 +21,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug Cache Key
-        run: echo "Cache Key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}"
-
       - name: Cache pnpm
         id: cached-dependencies
         uses: actions/cache/save@v3
@@ -33,7 +30,7 @@ jobs:
           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}
 
       - name: Debug Cache Hit
-        run: echo "Cache Hit: ${{ steps.cached-dependencies.outputs.cache-hit }}"
+        run: echo "Cache Hit - ${{ steps.cached-dependencies.outputs.cache-hit }}"
 
       - name: Debug Directory Structure
         run: |
