@@ -20,26 +20,20 @@ concurrency:
 
 jobs:
   tests:
-    name: 'Tests'
-    runs-on: ubuntu-latest
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yml@main
     with:
       username: interceptorxx
     secrets:
       token: ${{ secrets.envPAT }}
 
-    tests-setup:
-      name: 'Setup Tests'
-      runs-on: ubuntu-latest
-      uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yml@main
-      with:
-        username: interceptorxx
-      secrets:
-        token: ${{ secrets.envPAT }}
+  tests-setup:
+    uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yml@main
+    with:
+      username: interceptorxx
+    secrets:
+      token: ${{ secrets.envPAT }}
 
   reporter:
-    name: 'Reporter'
-    runs-on: ubuntu-latest
     needs: tests
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yml@main
     with:
