@@ -33,6 +33,8 @@ jobs:
           echo "PNPM Version: $(pnpm -v)"
           ls -al
           ls -al node_modules
+      - name: Restore cached dependencies
+        run: steps.pnpm-lock-id.outputs.cache-hit === 'true'
       - name: Run your tests
         run: npx playwright test src/
       - uses: actions/upload-artifact@v3
