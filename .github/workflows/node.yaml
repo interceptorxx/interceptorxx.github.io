@@ -30,12 +30,6 @@ jobs:
           restore-keys: |
             pnpm-${{ runner.os }}-build
             pnpm-${{ runner.os }}-
-      - name: Save Cache
-        id: cache
-        with:
-          path: |
-            ./
-          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install Node.js 20
         uses: actions/setup-node@v4
         with:
