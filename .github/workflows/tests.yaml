@@ -19,6 +19,8 @@ jobs:
       run:
         working-directory: myapp-qa
     steps:
+      - name: Debug working directory
+        run: ls -lR
       - name: Run your tests
         run: npx playwright test myapp-qa/src
       - uses: actions/upload-artifact@v3
@@ -27,5 +29,3 @@ jobs:
           name: github-pages
           path: myapp-qa/playwright-report
           retention-days: 30
-      - name: Test
-        run: ls -R
