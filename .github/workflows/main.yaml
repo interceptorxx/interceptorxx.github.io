@@ -13,14 +13,14 @@ concurrency:
 
 jobs:
   tests:
-    uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yml@main
+    uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yaml@main
     with:
       username: interceptorxx
     # secrets:
     #   token: ${{ secrets.envPAT }}
 
   tests-setup:
-    uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yml@main
+    uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yaml@main
     with:
       username: interceptorxx
     # secrets:
@@ -28,7 +28,7 @@ jobs:
 
   reporter:
     needs: tests
-    uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yml@main
+    uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yaml@main
     with:
       username: interceptorxx
     # secrets:
