@@ -21,11 +21,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Debug
+      - name: Debug Paths
         run: |
           pwd
           ls -a  # Check if files are listed without detailed information
           ls -alA
+      - name: Debugging Installed Packages
+        run: |
+          echo "Current Directory: $(pwd)"
+          echo "Node Version: $(node -v)"
+          echo "PNPM Version: $(pnpm -v)"
+          ls -al
+          ls -al node_modules
       - name: Run your tests
         run: npx playwright test src/
       - uses: actions/upload-artifact@v3
