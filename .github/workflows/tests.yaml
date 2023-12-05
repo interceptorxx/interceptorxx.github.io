@@ -32,6 +32,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build
             ${{ runner.os }}-
+
+      - name: Debug Cache Key
+        run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
       
       - name: Check cache hit
         if: steps.cached-dependencies.outputs.cache-hit != 'true'
