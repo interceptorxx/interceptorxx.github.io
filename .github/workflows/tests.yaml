@@ -30,7 +30,7 @@ jobs:
           
       - name: Reuse cached dependencies
         uses: actions/cache/restore@v3
-        id: cache
+        id: cached-dependencies
         with:
           path: |
             ./
