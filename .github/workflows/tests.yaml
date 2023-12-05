@@ -13,6 +13,9 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: myapp-qa
     steps:
       - name: Run your tests
         run: npx playwright test myapp-qa/src/
