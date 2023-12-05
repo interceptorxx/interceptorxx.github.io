@@ -27,14 +27,11 @@ jobs:
           ls -a  # Check if files are listed without detailed information
           ls -alA
       - name: Reuse cached dependencies
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ./
           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-${{ runner.os }}-build
-            pnpm-${{ runner.os }}-
       - name: Run your tests
         run: npx playwright test src/
       - uses: actions/upload-artifact@v3
