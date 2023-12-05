@@ -24,13 +24,12 @@ jobs:
       - name: Cache pnpm
         id: cached-dependencies
         uses: actions/cache/save@v3
+        if: always()
         with:
           path: |
             ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-build
-            ${{ runner.os }}-
+       
 
       - name: Debug Cache Hit
         run: echo "Cache Hit - ${{ steps.cached-dependencies.outputs.cache-hit }}"
