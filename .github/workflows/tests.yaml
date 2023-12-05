@@ -27,7 +27,7 @@ jobs:
         id: cached-dependencies
         with:
           path: |
-            ./myapp-qa/pnpm-lock.yaml
+            ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       
       - name: Check cache hit
