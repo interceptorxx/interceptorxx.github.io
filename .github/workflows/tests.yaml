@@ -17,9 +17,10 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
     defaults:
       run:
-        working-directory: myapp-qa/src
+        working-directory: myapp-qa
     steps:
- 
+      - name: Run your tests
+        run: npx playwright test myapp-qa/src/
       - uses: actions/upload-artifact@v3
         if: always()
         with:
