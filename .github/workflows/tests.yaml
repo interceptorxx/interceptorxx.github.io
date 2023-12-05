@@ -21,19 +21,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Run your tests
+        run: npx playwright test myapp-qa/src
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: github-pages
+          path: myapp-qa/playwright-report
+          retention-days: 30
       - name: Debug
         run: |
           pwd
           ls -a  # Check if files are listed without detailed information
           ls -alA
-    # steps:
-    #   - name: Debug working directory
-    #     run: ls
-    #   - name: Run your tests
-    #     run: npx playwright test myapp-qa/src
-    #   - uses: actions/upload-artifact@v3
-    #     if: always()
-    #     with:
-    #       name: github-pages
-    #       path: myapp-qa/playwright-report
-    #       retention-days: 30
