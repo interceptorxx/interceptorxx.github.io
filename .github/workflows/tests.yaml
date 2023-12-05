@@ -19,6 +19,8 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
     steps:
+      - name: Path Test
+        run: ls -R
       - name: Run your tests
         run: npx playwright test myapp-qa/src/
       - uses: actions/upload-artifact@v3
