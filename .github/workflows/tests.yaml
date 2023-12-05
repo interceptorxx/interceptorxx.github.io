@@ -29,6 +29,9 @@ jobs:
           path: |
             ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build
+            ${{ runner.os }}-
       
       - name: Check cache hit
         if: steps.cached-dependencies.outputs.cache-hit != 'true'
