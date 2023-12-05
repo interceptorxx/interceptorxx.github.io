@@ -51,7 +51,7 @@ jobs:
       - name: Install pnpm with Node.js 20
         run: npm install -g pnpm
       - name: Install dependencies
-        if: steps.pnpm-lock-id.outputs.cache-hit != 'true'
+        if: steps.cached-dependencies.outputs.cache-hit != 'true'
         run: pnpm install
       - name: Debug
         run: |
