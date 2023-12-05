@@ -19,7 +19,7 @@ jobs:
       - name: Debug
         run: |
           pwd
-          ls -al
+          ls -alA
     # steps:
     #   - name: Debug working directory
     #     run: ls
