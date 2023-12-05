@@ -31,7 +31,7 @@ jobs:
           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}
       
       - name: Check cache hit
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cached-dependencies.outputs.cache-hit != 'true'
         run: exit 1
 
       - name: Run your tests
