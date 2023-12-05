@@ -20,7 +20,7 @@ jobs:
         working-directory: myapp-qa
     steps:
       - name: Debug working directory
-        run: ls -lR
+        run: ls
       - name: Run your tests
         run: npx playwright test myapp-qa/src
       - uses: actions/upload-artifact@v3
