@@ -26,8 +26,6 @@ jobs:
           pwd
           ls -a  # Check if files are listed without detailed information
           ls -alA
-      - name: Restore cached dependencies
-        run: steps.pnpm-lock-id.outputs.cache-hit === 'true'
       - name: Run your tests
         run: npx playwright test src/
       - uses: actions/upload-artifact@v3
