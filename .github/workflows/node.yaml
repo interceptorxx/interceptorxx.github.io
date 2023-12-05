@@ -20,6 +20,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Debug Cache Key
+        run: echo "Cache Key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}"
+
       - name: Cache pnpm
         id: cached-dependencies
         uses: actions/cache/save@v3
@@ -27,6 +31,34 @@ jobs:
           path: |
             ./
           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}
+
+      - name: Debug Cache Hit
+        run: echo "Cache Hit: ${{ steps.cached-dependencies.outputs.cache-hit }}"
+
+      - name: Debug Directory Structure
+        run: |
+          pwd
+          ls -a
+
+      - name: Install Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm with Node.js 20
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        if: steps.cached-dependencies.outputs.cache-hit != 'true'
+        run: pnpm install
+
+      - name: Debug
+        run: |
+          pwd
+          ls -a  # Check if files are listed without detailed information
+          ls -alA
+
+
 
           
       # - name: Cache pnpm
@@ -40,21 +72,3 @@ jobs:
       #       pnpm-${{ runner.os }}-build
       #       pnpm-${{ runner.os }}-
         
-
-
-
-      
-      - name: Install Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install pnpm with Node.js 20
-        run: npm install -g pnpm
-      - name: Install dependencies
-        if: steps.cached-dependencies.outputs.cache-hit != 'true'
-        run: pnpm install
-      - name: Debug
-        run: |
-          pwd
-          ls -a  # Check if files are listed without detailed information
-          ls -alA
