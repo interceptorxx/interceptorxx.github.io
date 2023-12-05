@@ -31,7 +31,7 @@ jobs:
       - name: Install Node.js 18
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Install pnpm with Node.js 18
         run: npm install -g pnpm
       - name: Install dependencies
