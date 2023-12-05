@@ -28,7 +28,7 @@ jobs:
         with:
           path: |
             ./
-          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       
       - name: Check cache hit
         if: steps.cached-dependencies.outputs.cache-hit != 'true'
