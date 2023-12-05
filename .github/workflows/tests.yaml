@@ -15,9 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    defaults:
-      run:
-        working-directory: interceptorxx.github.io/myapp-qa
     steps:
       - name: Debug
         run: |
