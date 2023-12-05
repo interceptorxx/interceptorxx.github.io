@@ -19,6 +19,7 @@ jobs:
       - name: Debug
         run: |
           pwd
+          ls -a  # Check if files are listed without detailed information
           ls -alA
     # steps:
     #   - name: Debug working directory
