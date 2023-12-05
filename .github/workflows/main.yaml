@@ -16,20 +16,20 @@ jobs:
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yml@main
     with:
       username: interceptorxx
-    secrets:
-      token: ${{ secrets.envPAT }}
+    # secrets:
+    #   token: ${{ secrets.envPAT }}
 
   tests-setup:
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yml@main
     with:
       username: interceptorxx
-    secrets:
-      token: ${{ secrets.envPAT }}
+    # secrets:
+    #   token: ${{ secrets.envPAT }}
 
   reporter:
     needs: tests
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yml@main
     with:
       username: interceptorxx
-    secrets:
-      token: ${{ secrets.envPAT }}
+    # secrets:
+    #   token: ${{ secrets.envPAT }}
