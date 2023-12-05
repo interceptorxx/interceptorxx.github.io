@@ -26,3 +26,4 @@ jobs:
           name: github-pages
           path: myapp-qa/playwright-report
           retention-days: 30
+          if-no-files-found: error 
