@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    # defaults:
-    #   run:
-    #     working-directory: myapp-qa
+    defaults:
+      run:
+        working-directory: myapp-qa
     steps:
       - name: Run your tests
         run: npx playwright test src/
