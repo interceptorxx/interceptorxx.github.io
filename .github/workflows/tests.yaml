@@ -37,7 +37,7 @@ jobs:
           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       
       - name: Debug Cache Hit
-        run: echo "Cache Hit: ${{ steps.cached-dependencies.outputs.cache-hit }}"
+        run: echo "Cache Hit - ${{ steps.cached-dependencies.outputs.cache-hit }}"
 
       - name: Run your tests
         run: npx playwright test src/
