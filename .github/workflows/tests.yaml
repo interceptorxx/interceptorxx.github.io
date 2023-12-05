@@ -22,12 +22,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Debug Paths
-        run: |
-          pwd
-          ls -a  # Check if files are listed without detailed information
-          ls -alA
-          
       - name: Restore cached dependencies
         uses: actions/cache/restore@v3
         id: cached-dependencies
@@ -36,8 +30,9 @@ jobs:
             ./
           key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}
       
-      - name: Debug Cache Hit
-        run: echo "Cache Hit - ${{ steps.cached-dependencies.outputs.cache-hit }}"
+      - name: Check cache hit
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: exit 1
 
       - name: Run your tests
         run: npx playwright test src/
@@ -49,3 +44,9 @@ jobs:
           name: playwright-report
           path: myapp-qa/playwright-report
           retention-days: 30
+      
+      - name: Debug Paths
+        run: |
+          pwd
+          ls -a  # Check if files are listed without detailed information
+          ls -alA
