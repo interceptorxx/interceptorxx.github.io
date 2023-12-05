@@ -28,34 +28,24 @@ jobs:
           ls -a  # Check if files are listed without detailed information
           ls -alA
           
-      - name: Reuse cached dependencies
+      - name: Restore cached dependencies
         uses: actions/cache/restore@v3
         id: cached-dependencies
         with:
           path: |
             ./
-          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}-${{ github.run_number }}
-          
+          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      
+      - name: Debug Cache Hit
+        run: echo "Cache Hit: ${{ steps.cached-dependencies.outputs.cache-hit }}"
+
       - name: Run your tests
         run: npx playwright test src/
-      - uses: actions/upload-artifact@v3
+        
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: github-pages
+          name: playwright-report
           path: myapp-qa/playwright-report
           retention-days: 30
-        env:
-          HOME: /root
-
-          
-    # steps:
-    #   - name: Debug working directory
-    #     run: ls
-      # - name: Run your tests
-      #   run: npx playwright test myapp-qa/src
-      # - uses: actions/upload-artifact@v3
-      #   if: always()
-      #   with:
-      #     name: github-pages
-      #     path: myapp-qa/playwright-report
-      #     retention-days: 30
