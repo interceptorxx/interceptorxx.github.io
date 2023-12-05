@@ -26,7 +26,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: |
-            ./
+            ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Debug Cache Hit
