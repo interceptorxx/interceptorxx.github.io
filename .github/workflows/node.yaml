@@ -24,7 +24,6 @@ jobs:
       - name: Cache pnpm
         id: cached-dependencies
         uses: actions/cache/save@v3
-        if: always()
         with:
           path: |
             ./myapp-qa
