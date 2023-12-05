@@ -26,13 +26,6 @@ jobs:
           pwd
           ls -a  # Check if files are listed without detailed information
           ls -alA
-      - name: Debugging Installed Packages
-        run: |
-          echo "Current Directory: $(pwd)"
-          echo "Node Version: $(node -v)"
-          echo "PNPM Version: $(pnpm -v)"
-          ls -al
-          ls -al node_modules
       - name: Restore cached dependencies
         run: steps.pnpm-lock-id.outputs.cache-hit === 'true'
       - name: Run your tests
