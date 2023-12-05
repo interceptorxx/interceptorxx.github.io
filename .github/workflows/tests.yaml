@@ -15,15 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    defaults:
-      run:
-        working-directory: myapp-qa
     steps:
       - name: Run your tests
-        run: npx playwright test src/
+        run: npx playwright test myapp-qa/src/
       - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: github-pages
-          path: playwright-report
+          path: myapp-qa/playwright-report
           retention-days: 30
