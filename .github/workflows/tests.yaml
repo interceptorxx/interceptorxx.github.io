@@ -19,6 +19,8 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
     steps:
+      - name: Set working directory
+        run: cd myapp-qa
       - name: Check files in working directory
         run: find .
       - name: Run your tests
