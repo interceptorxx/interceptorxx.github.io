@@ -36,3 +36,8 @@ jobs:
         run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Debug
+        run: |
+          pwd
+          ls -a  # Check if files are listed without detailed information
+          ls -alA
