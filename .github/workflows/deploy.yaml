@@ -22,6 +22,35 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache npm
+        id: cached-dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./myapp-qa
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-build
+            npm-${{ runner.os }}-
+          
+      - name: Install Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        if: steps.cached-dependencies.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Debug Installed Dependencies
+        run: |
+          pwd
+          ls -a
+          ls -alA
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2 
