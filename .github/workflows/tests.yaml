@@ -21,7 +21,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
+
+      - name: Debug Paths
+        run: |
+          pwd
+          ls -a  # Check if files are listed without detailed information
+          ls -alA
+
       - name: Restore cache
         id: restore-cached-dependencies
         uses: actions/cache/restore@v3
@@ -44,9 +51,3 @@ jobs:
           name: playwright-report
           path: myapp-qa/playwright-report
           retention-days: 30
-      
-      - name: Debug Paths
-        run: |
-          pwd
-          ls -a  # Check if files are listed without detailed information
-          ls -alA
