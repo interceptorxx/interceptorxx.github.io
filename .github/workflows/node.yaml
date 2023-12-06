@@ -57,7 +57,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        if: steps.cached-dependencies.outputs.cache-hit != 'true'
+        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
         run: pnpm install
 
       - name: Debug
