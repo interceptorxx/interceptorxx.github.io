@@ -31,7 +31,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ./myapp-qa
+            ./myapp-qa/package-lock.json
+            ./node_modules/
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             npm-${{ runner.os }}-build
