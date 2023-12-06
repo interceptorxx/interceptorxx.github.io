@@ -18,10 +18,10 @@ jobs:
         working-directory: myapp-qa    
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1/2, 2/2] # max. = 4, recommended
+  # strategy:
+    # fail-fast: false
+    # matrix:
+      # shard: [1/2, 2/2] # max. = 4, recommended
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
