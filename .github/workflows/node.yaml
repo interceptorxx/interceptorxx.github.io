@@ -15,8 +15,10 @@ defaults:
     working-directory: myapp-qa
 
 jobs:
-  node:
+  install:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.40.0-jammy
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -67,19 +69,11 @@ jobs:
           ls -a  # Check if files are listed without detailed information
           ls -alA
 
-
   tests:
     runs-on: ubuntu-latest 
-    container:
-      image: mcr.microsoft.com/playwright:v1.40.0-jammy
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Debug Paths
-        run: |
-          pwd
-          ls -a  # Check if files are listed without detailed information
-          ls -alA
 
       - name: Restore cache
         id: restore-cached-dependencies
