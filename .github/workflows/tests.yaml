@@ -39,7 +39,10 @@ jobs:
 
       - name: Debug Cache Key
         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
-      
+
+      - name: Debug Cache Path
+        run: echo "Cache Path - ${{ runner.workspace }}/myapp-qa"
+        
       - name: Run your tests
         if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
         run: npx playwright test src/
