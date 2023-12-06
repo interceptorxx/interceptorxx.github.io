@@ -1,10 +1,12 @@
 # Project Title
 
-Playwright Testing Tool developed by Microsoft for E2E and Unit Testing. Note that data mocking is not supported at the moment.
+Playwright Testing Tool developed by Microsoft for E2E and Unit Testing.
 
 This template is designed to be used as a separate project, enabling QA teams to have their own repositories.
 
 Suggestion: Access frontend using data-testid, BUT here is the example I implemented in SvelteKit on how to hide it in a production environment to protect against web scrapers, and DoS attacks.
+
+Note: Mocking data is not supported at this time and requires Vitest. Let's hope Playwright 2.0 will support Mocking data. Anyway. Nevertheless, `You're required to have 1 GitHub Pages per account.`
 
 ![image](https://github.com/interceptorxx/interceptorxx.github.io/assets/152772842/30771fb1-c196-4195-bbca-011f49bf62fe)
 
