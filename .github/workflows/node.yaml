@@ -1,4 +1,4 @@
-name: Install Node
+name: Install Node and Run Playwright Tests
 
 on:
   workflow_call:
@@ -39,18 +39,7 @@ jobs:
           path: |
             ./myapp-qa
           key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
-
-      - name: Debug Cache Key
-        run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
-      
-      - name: Debug Cache Hit
-        run: echo "Cache Hit - ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}"
-
-      - name: Debug Directory Structure
-        run: |
-          pwd
-          ls -a
-
+          
       - name: Install Node.js 20
         uses: actions/setup-node@v4
         with:
@@ -82,13 +71,16 @@ jobs:
           path: |
             ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - name: Debug Cache Key
-        run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
-
-      - name: Debug Cache Path
-        run: echo "Cache Path - ${{ runner.workspace }}/myapp-qa"
         
+      - name: Install Node.js 20 for tests
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies for tests
+        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
+        run: pnpm install
+
       - name: Run your tests
         run: npx playwright test src/
         
@@ -99,17 +91,3 @@ jobs:
           name: playwright-report
           path: myapp-qa/playwright-report
           retention-days: 30
-
-
-          
-      # - name: Cache pnpm
-      #   id: pnpm-lock-id
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: |
-      #       ./
-      #     key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       pnpm-${{ runner.os }}-build
-      #       pnpm-${{ runner.os }}-
-        
