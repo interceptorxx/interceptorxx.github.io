@@ -34,22 +34,22 @@ jobs:
       #       pnpm-${{ runner.os }}-
 
 
-      - name: Restore cache
-        id: restore-cached-dependencies
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            ./myapp-qa
-          key: ${{ runner.os }}-${{ hashFiles('**/package.json') }}   
+      # - name: Restore cache
+      #   id: restore-cached-dependencies
+      #   uses: actions/cache/restore@v3
+      #   with:
+      #     path: |
+      #       ./myapp-qa
+      #     key: ${{ runner.os }}-${{ hashFiles('**/package.json') }}   
 
-      - name: Cache dependencies
-        id: save-cached-dependencies
-        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v3
-        with:
-          path: |
-            ./myapp-qa
-          key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
+      # - name: Cache dependencies
+      #   id: save-cached-dependencies
+      #   if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
+      #   uses: actions/cache/save@v3
+      #   with:
+      #     path: |
+      #       ./myapp-qa
+      #     key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
           
       - name: Install Node.js 20
         uses: actions/setup-node@v4
