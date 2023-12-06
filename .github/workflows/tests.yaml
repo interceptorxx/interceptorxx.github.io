@@ -31,7 +31,7 @@ jobs:
           path: |
             ./myapp-qa/package-lock.json
             ./node_modules/
-          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             npm-${{ runner.os }}-build
             npm-${{ runner.os }}-
