@@ -20,6 +20,7 @@ jobs:
       token: ${{ secrets.envPAT }}
 
   artifact:
+    if: always()
     needs: [execute]
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yaml@main
     with:
