@@ -16,30 +16,7 @@ permissions:
   id-token: write
 
 jobs:
-  merge:
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: myapp-qa/github-pages 
-      steps:
-      - name: Download blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: github-pages
-          path: github-pages
-  
-      - name: Merge into HTML Report
-        run: npx playwright merge-reports --reporter html ./github-pages
-  
-      - name: Upload HTML report
-        uses: actions/upload-pages-artifact@v2
-        with:
-          name: html-report--attempt-${{ github.run_attempt }}
-          path: github-pages
-          retention-days: 14
-   
   deployment:
-      needs: [merge]
       environment:
         name: github-pages
         url: ${{ steps.deployment.outputs.page_url }}
