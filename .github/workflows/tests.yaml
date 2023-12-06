@@ -22,16 +22,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Restore cached dependencies
+      - name: Cache Restore
+        id: restore-cache
         uses: actions/cache/restore@v3
-        id: cached-dependencies
         with:
           path: |
             ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-build
-            ${{ runner.os }}-
 
       - name: Debug Cache Key
         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
