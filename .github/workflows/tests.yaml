@@ -28,12 +28,13 @@ jobs:
         with:
           path: |
             ./myapp-qa
-          key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Debug Cache Key
         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
       
       - name: Run your tests
+        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
         run: npx playwright test src/
         
       - name: Upload Playwright report
