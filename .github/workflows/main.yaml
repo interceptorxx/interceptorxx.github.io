@@ -12,23 +12,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  install:
+  runs:
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yaml@main
     with:
       username: interceptorxx
     secrets:
       token: ${{ secrets.envPAT }}
 
-  prepare:
-    needs: install
-    uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yaml@main
-    with:
-      username: interceptorxx
-    secrets:
-      token: ${{ secrets.envPAT }}
-
   reporter:
-    needs: prepare
+    needs: runs
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yaml@main
     with:
       username: interceptorxx
