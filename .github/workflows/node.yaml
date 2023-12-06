@@ -33,24 +33,6 @@ jobs:
           restore-keys: |
             npm-${{ runner.os }}-build
             npm-${{ runner.os }}-
-
-
-      # - name: Restore cache
-      #   id: restore-cached-dependencies
-      #   uses: actions/cache/restore@v3
-      #   with:
-      #     path: |
-      #       ./myapp-qa
-      #     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}   
-
-      # - name: Cache dependencies
-      #   id: save-cached-dependencies
-      #   if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
-      #   uses: actions/cache/save@v3
-      #   with:
-      #     path: |
-      #       ./myapp-qa
-      #     key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
           
       - name: Install Node.js 20
         uses: actions/setup-node@v4
@@ -73,8 +55,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-    
+        
+      - name: Cache npm
+        id: cached-dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./myapp-qa
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-build
+            npm-${{ runner.os }}-
+            
       - name: Install Node.js 20
         uses: actions/setup-node@v4
         with:
@@ -84,14 +76,6 @@ jobs:
         if: steps.cached-dependencies.outputs.cache-hit != 'true'
         run: npm ci
         
-      # - name: Restore cache
-      #   id: restore-cached-dependencies
-      #   uses: actions/cache/restore@v3
-      #   with:
-      #     path: |
-      #       ./myapp-qa
-      #     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-
       - name: Run your tests
         run: npx playwright test src/
         
@@ -102,3 +86,31 @@ jobs:
           name: playwright-report
           path: myapp-qa/playwright-report
           retention-days: 30
+
+
+
+      # - name: Restore cache
+      #   id: restore-cached-dependencies
+      #   uses: actions/cache/restore@v3
+      #   with:
+      #     path: |
+      #       ./myapp-qa
+      #     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}   
+
+      # - name: Cache dependencies
+      #   id: save-cached-dependencies
+      #   if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
+      #   uses: actions/cache/save@v3
+      #   with:
+      #     path: |
+      #       ./myapp-qa
+      #     key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
+
+
+            # - name: Restore cache
+      #   id: restore-cached-dependencies
+      #   uses: actions/cache/restore@v3
+      #   with:
+      #     path: |
+      #       ./myapp-qa
+      #     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
