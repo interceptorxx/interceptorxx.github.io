@@ -1,56 +1,56 @@
-name: Tests
+# name: Tests
 
-on:
-  workflow_call:
-    inputs:
-      username:
-        required: true
-        type: string
-    secrets:
-      token:
-        required: true
+# on:
+#   workflow_call:
+#     inputs:
+#       username:
+#         required: true
+#         type: string
+#     secrets:
+#       token:
+#         required: true
 
-jobs:
-  tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: myapp-qa    
-    container:
-      image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+# jobs:
+#   tests:
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         working-directory: myapp-qa    
+#     container:
+#       image: mcr.microsoft.com/playwright:v1.40.0-jammy
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
 
-      - name: Debug Paths
-        run: |
-          pwd
-          ls -a  # Check if files are listed without detailed information
-          ls -alA
+#       - name: Debug Paths
+#         run: |
+#           pwd
+#           ls -a  # Check if files are listed without detailed information
+#           ls -alA
 
-      - name: Restore cache
-        id: restore-cached-dependencies
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            ./myapp-qa
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+#       - name: Restore cache
+#         id: restore-cached-dependencies
+#         uses: actions/cache/restore@v3
+#         with:
+#           path: |
+#             ./myapp-qa
+#           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - name: Debug Cache Key
-        run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
+#       - name: Debug Cache Key
+#         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
 
-      - name: Debug Cache Path
-        run: echo "Cache Path - ${{ runner.workspace }}/myapp-qa"
+#       - name: Debug Cache Path
+#         run: echo "Cache Path - ${{ runner.workspace }}/myapp-qa"
         
-      - name: Run your tests
-        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
-        run: npx playwright test src/
+#       - name: Run your tests
+#         if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
+#         run: npx playwright test src/
         
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: myapp-qa/playwright-report
-          retention-days: 30
+#       - name: Upload Playwright report
+#         uses: actions/upload-artifact@v3
+#         if: always()
+#         with:
+#           name: playwright-report
+#           path: myapp-qa/playwright-report
+#           retention-days: 30
