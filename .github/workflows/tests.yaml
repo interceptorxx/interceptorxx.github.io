@@ -28,7 +28,7 @@ jobs:
         with:
           path: |
             ./myapp-qa
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}   
+          key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
 
       - name: Debug Cache Key
         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
