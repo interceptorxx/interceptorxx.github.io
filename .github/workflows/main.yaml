@@ -19,8 +19,16 @@ jobs:
     secrets:
       token: ${{ secrets.envPAT }}
 
-  reporter:
+  execute:
     needs: runs
+    uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yaml@main
+    with:
+      username: interceptorxx
+    secrets:
+      token: ${{ secrets.envPAT }}
+
+  reporter:
+    needs: execute
     uses: interceptorxx/interceptorxx.github.io/.github/workflows/deploy.yaml@main
     with:
       username: interceptorxx
