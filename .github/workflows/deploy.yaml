@@ -28,7 +28,7 @@ jobs:
           name: github-pages
   
       - name: Merge into HTML Report
-        run: npx playwright merge-reports --reporter html .
+        run: npx playwright merge-reports --reporter html ./playwright-report
   
       - name: Upload HTML report
         uses: actions/upload-pages-artifact@v2
