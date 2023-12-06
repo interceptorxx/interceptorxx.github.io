@@ -25,11 +25,10 @@ jobs:
       - name: Download blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v3
         with:
-          name: all-blob-reports
-          path: all-blob-reports
+          name: github-pages
   
       - name: Merge into HTML Report
-        run: npx playwright merge-reports --reporter html ./all-blob-reports 
+        run: npx playwright merge-reports --reporter html ./merged-shards
   
       - name: Upload HTML report
         uses: actions/upload-pages-artifact@v2
