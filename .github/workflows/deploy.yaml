@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  deploy:
+  reporter:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
