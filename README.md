@@ -1,6 +1,10 @@
 # Project Title
 
-A brief description of your project.
+Playwright Testing Tool developed by Microsoft for E2E and Unit Testing. Note that data mocking is not supported at the moment.
+
+### Playwright Features Utilized
+* Page Object Model
+* HTML Reporter to GitHub Pages using GitHub Actions (Useful for QA teams)
 
 ## Table of Contents
 
@@ -11,7 +15,7 @@ A brief description of your project.
 
 ## Introduction
 
-Provide an introduction to your project. Explain what problem it solves and how it can be useful.
+I've developed a fundamental project catering to QA engineers, with a primary emphasis on establishing a robust CI/CD (DevOps) pipeline. While my focus has been on the infrastructure for continuous integration and deployment, I acknowledge that my exploration of testing practices has been limited.
 
 ## Installation
 
@@ -19,13 +23,13 @@ Include instructions on how to install and set up your project. This might inclu
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/your-repo.git
+git clone https://github.com/interceptorxx/interceptorxx.github.io.git
 
 # Navigate to the project directory
 cd myapp-qa
 
 # Install dependencies
-pnpm i
+npm install
 ```
 
 ## Usage
