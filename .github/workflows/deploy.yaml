@@ -28,7 +28,7 @@ jobs:
           name: github-pages
   
       - name: Merge into HTML Report
-        run: npx playwright merge-reports --reporter html ./merged-shards
+        run: npx playwright merge-reports --reporter html .
   
       - name: Upload HTML report
         uses: actions/upload-pages-artifact@v2
@@ -38,6 +38,7 @@ jobs:
           retention-days: 14
    
   deployment:
+      needs: [merge]
       environment:
         name: github-pages
         url: ${{ steps.deployment.outputs.page_url }}
