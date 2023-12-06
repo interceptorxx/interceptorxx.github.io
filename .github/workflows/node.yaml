@@ -31,6 +31,7 @@ jobs:
 
       - name: Cache dependencies
         id: save-cached-dependencies
+        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
         uses: actions/cache/save@v3
         with:
           path: |
