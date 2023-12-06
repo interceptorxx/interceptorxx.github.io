@@ -59,6 +59,7 @@ jobs:
           ls -alA
 
   tests:
+    needs: install
     runs-on: ubuntu-latest 
     steps:
       - name: Checkout repository
