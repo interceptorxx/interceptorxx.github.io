@@ -4,7 +4,7 @@ Playwright Testing Tool developed by Microsoft for E2E and Unit Testing. Note th
 
 This template is designed to be used as a separate project, enabling QA teams to have their own repositories.
 
-Suggestion: Access frontend using data-testid, BUT here is the example on how to hide it in a production environment to protect against web scrapers, and DoS attacks.
+Suggestion: Access frontend using data-testid, BUT here is the example I implemented in SvelteKit on how to hide it in a production environment to protect against web scrapers, and DoS attacks.
 
 ![image](https://github.com/interceptorxx/interceptorxx.github.io/assets/152772842/30771fb1-c196-4195-bbca-011f49bf62fe)
 
