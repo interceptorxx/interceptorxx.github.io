@@ -23,34 +23,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # - name: Cache pnpm
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       ./myapp-qa
+      #     key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       pnpm-${{ runner.os }}-build
+      #       pnpm-${{ runner.os }}-
 
-      - name: Cache pnpm
-        uses: actions/cache@v3
+
+      - name: Restore cache
+        id: restore-cached-dependencies
+        uses: actions/cache/restore@v3
         with:
           path: |
             ./myapp-qa
-          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-${{ runner.os }}-build
-            pnpm-${{ runner.os }}-
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}   
 
-
-      # - name: Restore cache
-      #   id: restore-cached-dependencies
-      #   uses: actions/cache/restore@v3
-      #   with:
-      #     path: |
-      #       ./myapp-qa
-      #     key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}   
-
-      # - name: Cache dependencies
-      #   id: save-cached-dependencies
-      #   if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
-      #   uses: actions/cache/save@v3
-      #   with:
-      #     path: |
-      #       ./myapp-qa
-      #     key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
+      - name: Cache dependencies
+        id: save-cached-dependencies
+        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: |
+            ./myapp-qa
+          key: ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}
           
       - name: Install Node.js 20
         uses: actions/setup-node@v4
@@ -71,13 +70,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # - name: Restore cache
-      #   id: restore-cached-dependencies
-      #   uses: actions/cache/restore@v3
-      #   with:
-      #     path: |
-      #       ./myapp-qa
-      #     key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Restore cache
+        id: restore-cached-dependencies
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            ./myapp-qa
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Run your tests
         run: npx playwright test src/
