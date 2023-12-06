@@ -51,13 +51,7 @@ jobs:
       - name: Install dependencies
         if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
         run: pnpm install
-
-      - name: Debug
-        run: |
-          pwd
-          ls -a  # Check if files are listed without detailed information
-          ls -alA
-
+        
   tests:
     needs: install
     runs-on: ubuntu-latest 
@@ -72,15 +66,6 @@ jobs:
           path: |
             ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        
-      - name: Install Node.js 20 for tests
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies for tests
-        if: steps.restore-cached-dependencies.outputs.cache-hit != 'true'
-        run: pnpm install
 
       - name: Run your tests
         run: npx playwright test src/
