@@ -41,7 +41,7 @@ jobs:
         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
       
       - name: Debug Cache Hit
-        run: echo "Cache Hit - ${{ steps.cached-dependencies.outputs.cache-hit }}"
+        run: echo "Cache Hit - ${{ steps.restore-cached-dependencies.outputs.cache-primary-key }}"
 
       - name: Debug Directory Structure
         run: |
