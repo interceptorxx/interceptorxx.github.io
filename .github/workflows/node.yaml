@@ -29,6 +29,14 @@ jobs:
             ./myapp-qa
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
+      - name: Cache Restore
+        id: restore-cache
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            ./myapp-qa
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
       - name: Debug Cache Key
         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
       
