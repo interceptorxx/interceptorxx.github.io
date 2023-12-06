@@ -21,7 +21,7 @@ jobs:
 
   execute:
     needs: runs
-    uses: interceptorxx/interceptorxx.github.io/.github/workflows/node.yaml@main
+    uses: interceptorxx/interceptorxx.github.io/.github/workflows/tests.yaml@main
     with:
       username: interceptorxx
     secrets:
