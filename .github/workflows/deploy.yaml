@@ -18,6 +18,9 @@ permissions:
 jobs:
   merge:
       runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: myapp-qa    
       steps:
       - name: Download blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v3
