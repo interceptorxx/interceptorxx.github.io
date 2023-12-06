@@ -71,13 +71,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Restore cache
-        id: restore-cached-dependencies
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            ./myapp-qa
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      # - name: Restore cache
+      #   id: restore-cached-dependencies
+      #   uses: actions/cache/restore@v3
+      #   with:
+      #     path: |
+      #       ./myapp-qa
+      #     key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Run your tests
         run: npx playwright test src/
