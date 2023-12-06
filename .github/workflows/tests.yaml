@@ -22,21 +22,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Cache Restore
-        id: restore-cache
+      - name: Restore cache
+        id: restore-cached-dependencies
         uses: actions/cache/restore@v3
         with:
           path: |
             ./myapp-qa
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}   
 
       - name: Debug Cache Key
         run: echo "Cache Key - ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}"
       
-      - name: Check cache hit
-        if: steps.cached-dependencies.outputs.cache-hit != 'true'
-        run: exit 1
-
       - name: Run your tests
         run: npx playwright test src/
         
