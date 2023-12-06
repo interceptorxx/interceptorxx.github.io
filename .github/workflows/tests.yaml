@@ -50,7 +50,7 @@ jobs:
         run: npx playwright test src/ --shard ${{ matrix.shard }}
 
       - name: Upload Playwright report
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: github-pages
